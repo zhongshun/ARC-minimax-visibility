@@ -4,8 +4,8 @@ clear
 % G = graph(A,'OmitSelfLoops');
 % H = plot(G)
 %Initial p
-Guard_position = 250;
-load('Graph')
+Guard_position = 245;
+load('data\Graph.mat')
  H = plot(G,'XData',x_lable,'YData',y_lable,'MarkerSize',5);
 G.Nodes.P(Guard_position) = 1 ;
 p(Guard_position) = 1;
@@ -24,21 +24,21 @@ end
 
 %update P for 1 step to T
 for T = 1: 25
-    highlight(H,[1:numel(p)],'NodeColor','b')
-    list = find(p ~= 0);
+    highlight(H,[1:numel(p(T,:))],'NodeColor','b')
+    list = find(p(T,:) ~= 0);
     highlight(H,list,'NodeColor','r')
-    pause(2)
+    pause(1)
     
-    
+    p_c = p(T,:);
     for i = 1:nnz(list)
         N = neighbors(G,list(i));
-        p_N = p(list(i))/nnz(N);
+        p_N = p_c(list(i))/nnz(N);
         for j = 1:nnz(N)
             Point = N(j);
             p_next(N(j)) = p_next(N(j)) + p_N;
         end       
     end
-    p = p_next;
+    p(T+1,:) = p_next;
     p_next = zeros(size(p_next));
     
 end

@@ -1,0 +1,30 @@
+function position = random_postion(p1)
+    Possible_Position = find(p1 ~= 0);
+    Probability = p1(Possible_Position); 
+    range = 1e12;
+    X = randi([1,range]);
+    Base = range*Probability(1);
+    
+    for i = 2:nnz(Possible_Position)
+        if X <= Base
+           position = Possible_Position(i-1);
+           return
+        else
+            Base = Base + range*Probability(i);
+        end
+    end
+    position = Possible_Position(i);
+end
+
+% times = zeros(3,1);
+% for k = 1:100
+%     position = random_postion(p(2,:))
+%     if position == 220
+%         times(1) = time(1) + 1;
+%     elseif position == 244
+%         times(2) = time(2) + 1;
+%     else
+%         times(3) = time(3) + 1;
+%     end
+%     
+% end
