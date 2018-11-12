@@ -1,6 +1,10 @@
 % Input the distribution P in the graph, return a random position based on the probability
 function position = Random_Postion_Generator(p1) 
     Possible_Position = find(p1 ~= 0);
+    if nnz(Possible_Position) == 1
+        position = Possible_Position;
+        return
+    end
     Probability = p1(Possible_Position); 
     range = 1e12;
     X = randi([1,range]);

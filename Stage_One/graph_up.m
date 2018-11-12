@@ -4,7 +4,7 @@ clear
 % G = graph(A,'OmitSelfLoops');
 % H = plot(G)
 %Initial p
-Guard_position = 245;
+Guard_position = 15;
 load('data\Graph.mat')
  H = plot(G,'XData',x_lable,'YData',y_lable,'MarkerSize',5);
 G.Nodes.P(Guard_position) = 1 ;
